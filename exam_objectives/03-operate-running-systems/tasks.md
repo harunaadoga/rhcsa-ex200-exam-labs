@@ -1,29 +1,31 @@
 # 03 - Operate Running Systems
 
-## Task 1: Reset Root Password
-- Break into node2 and set a new root password to `hoppy`.
+## Task 1: Reset Root Password (node2)
+1.1 Break into node2 and set the root password to `hoppy`.
 
-## Task 2: Tuning Profile & SELinux
-- Check the current recommended tuning profile.
-- Put SELinux in permissive mode on node2.
-- On node1 ensure network service is enabled and starts on boot.
+## Task 2: Tuning Profile, SELinux and Network Service
+2.1 Check the recommended tuning profile.
+2.2 Put SELinux in permissive mode on node2.
+2.3 On node1, make sure the network service is enabled and starts at boot.
 
-## Task 3: Persistent Journaling
-- Configure persistent journaling on both servers to retain logs across reboots.
+## Task 3: Persistent Journaling (node1 and node2)
+3.1 Configure persistent journaling so logs are kept across reboots.
 
-## Task 4: Process Scheduling
-- Start a stress-ng process on node1 with niceness 19.
-- Adjust the niceness value to 10.
-- Terminate the stress-ng process.
+## Task 4: Process Scheduling (node1)
+4.1 Start a stress-ng process with a niceness of 19.
+4.2 Change its niceness to 10.
+4.3 Terminate the stress-ng process.
 
-## Task 5: File Permissions & ACLs
-- Copy /etc/fstab to /var/tmp.
-- Set owner to root.
-- Remove execute permissions.
-- Configure ACLs:
-  - adam: read & write
-  - maryam: no access
-  - Others: read-only
+## Task 5: File Permissions & ACLs (node1)
+Users adam and maryam must exist (created in objective 02).
 
-## Task 6: Secure File Transfer
-- On node1, create `node1-file.ext` and scp it to user hadoga's home on node2.
+5.1 Copy /etc/fstab to /var/tmp.
+5.2 Set the owner to root.
+5.3 Remove execute permissions for everyone.
+5.4 Configure ACLs on /var/tmp/fstab:
+   - adam: read and write
+   - maryam: no access
+   - others: read only
+
+## Task 6: Secure File Transfer (node1)
+6.1 Create `node1-file.ext` and copy it securely to user hadoga's home directory on node2.

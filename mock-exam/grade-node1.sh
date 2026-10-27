@@ -28,7 +28,7 @@ check "Hostname servera.rhcsa.home" "[ \"\$(hostnamectl hostname)\" = servera.rh
 echo "Task 3: Repositories"
 check "BaseOS repo configured"    "grep -rq 'repo.rhcsa.home/repo/BaseOS' /etc/yum.repos.d/"
 check "AppStream repo configured" "grep -rq 'repo.rhcsa.home/repo/AppStream' /etc/yum.repos.d/"
-check "Repos work"                "dnf -q list available words"
+check "Repos work"                "dnf -q makecache"
 
 echo "Task 4: Users and groups"
 check "Group teamgrp exists"      "getent group teamgrp"

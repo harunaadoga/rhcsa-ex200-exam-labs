@@ -65,7 +65,7 @@ systemctl enable podman-restart.service
 # Image for task 21
 mkdir -p /root/filebox
 cat > /root/filebox/Containerfile << 'EOF'
-FROM registry.access.redhat.com/ubi10/ubi-minimal
+FROM registry.access.redhat.com/ubi9/ubi-minimal
 CMD ["sleep", "infinity"]
 EOF
 podman build -t repo.rhcsa.home:5000/rhcsa/filebox:latest /root/filebox
@@ -75,7 +75,7 @@ podman push --tls-verify=false repo.rhcsa.home:5000/rhcsa/filebox:latest
 # Containerfile for lab 10
 mkdir -p /var/www/html/containers
 cat > /var/www/html/containers/Containerfile << 'EOF'
-FROM registry.access.redhat.com/ubi10/ubi
+FROM registry.access.redhat.com/ubi9/ubi
 RUN dnf install -y httpd && dnf clean all
 RUN echo "RHCSA container works" > /var/www/html/index.html
 EXPOSE 80

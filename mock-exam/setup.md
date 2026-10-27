@@ -5,7 +5,7 @@
 | VM | IP | Extra disks |
 |----|----|-------------|
 | repo | 192.168.70.5 | none (attach the full DVD ISO as CD/DVD) |
-| node1 | 192.168.70.10 | none |
+| node1 | 192.168.70.10 | /dev/vdb 2GB (for labs 04 and 05) |
 | node2 | 192.168.70.20 | /dev/vdb 2GB, /dev/vdc 1GB |
 
 - RHEL 10, Rocky Linux 10 or AlmaLinux 10, minimal install, 2 vCPU, 2GB RAM, 20GB disk each. Use the same distro on all 3 VMs.
@@ -15,6 +15,8 @@
 - Disks may show as `/dev/sdb` and `/dev/sdc` on some hypervisors. If so, change `vdc` in `prep-node2.sh` and use `sdb` in the exam.
 
 ## 2. Run the scripts as root
+
+> **Doing the objective labs?** Only run `setup-repo.sh` on the repo VM, then snapshot node1 and node2. The two prep scripts are for the mock exam only.
 
 Copy the scripts to each VM (`scp`, or `git clone` this repo), then run them in this order:
 

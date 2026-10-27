@@ -9,6 +9,8 @@ Configure these repos on node1:
 - BaseOS: `http://repo.rhcsa.home/repo/BaseOS/`
 - AppStream: `http://repo.rhcsa.home/repo/AppStream/`
 
+Check they show up with `dnf repolist`. In the exam the repo server is provided. In this lab the repos only need to work if you built the optional `repo` VM.
+
 ## Chrony
 Set up chrony to sync with `server.rhel.com`.
 

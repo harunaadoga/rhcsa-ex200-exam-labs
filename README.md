@@ -37,7 +37,7 @@ Use the same major version as your exam: 9 for the RHEL 9 exam, 10 for the RHEL 
 
 ## How to Use
 
-1. Set up a lab with 2 to 3 VMs (`node1`, `node2`, optional repo server) running RHEL, Rocky Linux or AlmaLinux
+1. Build the lab: `node1` and `node2` running RHEL, Rocky Linux or AlmaLinux. A third `repo` VM is optional for the labs and needed for the mock exam. See the [setup guide](./mock-exam/setup.md).
 2. Work through each objective in order
 3. Try every task **before** opening the solution
 4. Watch the matching video if you get stuck

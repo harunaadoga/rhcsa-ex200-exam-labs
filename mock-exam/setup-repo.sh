@@ -34,7 +34,10 @@ dnf install -y httpd nfs-utils chrony podman httpd-tools
 restorecon -R /var/www/html
 systemctl enable --now httpd
 
-# NFS home for netuser1 (task 14)
+# NFS homes: netuser1 (mock exam task 14), bobby (lab 05)
+useradd -u 2060 bobby
+echo "bobby:hoppy" | chpasswd
+echo "/home/bobby  192.168.70.0/24(rw,sync)" >> /etc/exports
 useradd -u 3001 netuser1
 echo "netuser1:flamingo" | chpasswd
 echo "/home/netuser1  192.168.70.0/24(rw,sync)" >> /etc/exports
@@ -68,6 +71,17 @@ EOF
 podman build -t repo.rhcsa.home:5000/rhcsa/filebox:latest /root/filebox
 podman login --tls-verify=false -u rhcsa -p Passw0rd repo.rhcsa.home:5000
 podman push --tls-verify=false repo.rhcsa.home:5000/rhcsa/filebox:latest
+
+# Containerfile for lab 10
+mkdir -p /var/www/html/containers
+cat > /var/www/html/containers/Containerfile << 'EOF'
+FROM registry.access.redhat.com/ubi10/ubi
+RUN dnf install -y httpd && dnf clean all
+RUN echo "RHCSA container works" > /var/www/html/index.html
+EXPOSE 80
+CMD ["httpd", "-DFOREGROUND"]
+EOF
+restorecon -R /var/www/html/containers
 
 # Firewall
 firewall-cmd --permanent --add-service={http,nfs,mountd,rpc-bind,ntp}

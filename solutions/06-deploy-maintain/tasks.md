@@ -2,9 +2,9 @@
 
 > Run as root on node1.
 
-## Cron & at
+## Task 1: Cron & at
 
-### Cron job for hadoga
+### 1.1 Cron job for hadoga
 ```bash
 crontab -e -u hadoga
 */2 * * * * logger "RHCSA Playlist Now Available"
@@ -15,7 +15,7 @@ crontab -l -u hadoga
 journalctl | grep "RHCSA Playlist"
 ```
 
-### at job
+### 1.2 at job
 ```bash
 dnf install -y at
 systemctl enable --now atd
@@ -31,7 +31,7 @@ atq                         # job is queued
 cat /at-files/at.txt
 ```
 
-## YUM Repositories
+## Task 2: Repositories
 
 ```bash
 vi /etc/yum.repos.d/rhcsa.repo
@@ -53,11 +53,10 @@ gpgcheck=0
 dnf clean all
 
 # Verify
-dnf repolist
-dnf install -y tree         # any package, to confirm the repos work
+dnf repolist                # BaseOS and AppStream listed
 ```
 
-## Chrony
+## Task 3: Chrony
 
 ```bash
 dnf install -y chrony
@@ -72,11 +71,10 @@ systemctl enable chronyd
 systemctl restart chronyd
 
 # Verify
-chronyc sources -v          # server.rhel.com listed, ^* when synced
-timedatectl                 # NTP service: active
+chronyc sources             # server.rhel.com is listed
 ```
 
-## GRUB Modification
+## Task 4: GRUB
 
 ```bash
 vi /etc/default/grub

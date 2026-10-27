@@ -21,7 +21,7 @@ Log in with SSH, not `su`. Rootless podman and `systemctl --user` need a real lo
 ssh haruna@node2
 
 mkdir ~/web && cd ~/web
-wget http://repo.rhcsa.home/containers/Containerfile
+curl -O http://repo.rhcsa.home/containers/Containerfile
 podman build -t web_image .
 
 # Verify

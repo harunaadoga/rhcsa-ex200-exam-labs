@@ -77,8 +77,6 @@ Use the same major version as your exam: 9 for the RHEL 9 exam, 10 for the RHEL 
 
 The labs get fixes and updates. If you forked this repo, click **Sync fork** on your fork's page to get the latest changes. If you cloned it, run `git pull`.
 
-To get notified when something new is added, click **Watch** > **Custom** > **Releases** at the top of this page.
-
 ---
 
 ## Disclaimer

@@ -10,7 +10,7 @@ New to virtual machines? This section covers what you need.
 
 ### A computer
 
-- **RAM:** 16GB recommended. With 8GB, give each VM 1.5GB instead of 2GB.
+- **RAM:** each VM uses 2GB. The labs need 2 VMs (4GB), the mock exam needs 3 (6GB), plus what your computer itself uses. 16GB is comfortable, 8GB is enough for the labs.
 - **Free disk space:** about 70GB.
 
 ### A hypervisor
@@ -19,9 +19,10 @@ A hypervisor is software that runs virtual machines (VMs) on your computer. Pick
 
 | Your computer | Hypervisor |
 |---------------|------------|
-| Windows, Linux or Intel Mac | [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or VMware Workstation / Fusion |
-| Apple Silicon Mac (M1 or newer) | [UTM](https://mac.getutm.app/) |
-| Linux | virt-manager (KVM) |
+| Windows | [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or VMware Workstation |
+| Linux | [VirtualBox](https://www.virtualbox.org/wiki/Downloads), VMware Workstation or virt-manager (KVM) |
+| Intel Mac | [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or VMware Fusion |
+| Apple Silicon Mac (M1 or newer) | [UTM](https://mac.getutm.app/) or VMware Fusion |
 | A home server | [Proxmox VE](https://www.proxmox.com/en/downloads) |
 
 ### An ISO

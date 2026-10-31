@@ -36,6 +36,8 @@ Configure node1 with:
 **2. Hostname**
 Set the hostname of node1 to `servera.rhcsa.home`.
 
+The VM is still called node1 in the setup guide and diagram. This task only changes its hostname, like hostname tasks in the real exam. Both names point to 192.168.70.10.
+
 **3. Repositories**
 Configure BaseOS and AppStream from the URLs above as the default repositories on node1.
 

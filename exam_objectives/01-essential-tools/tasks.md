@@ -17,7 +17,7 @@
 3.1 Find files in /usr that are greater than 3MB but < 10MB and copy them to /bigfiles directory.
 3.2 Find files in /etc modified more than 120 days ago and copy them to /var/tmp/twenty/
 3.3 Find all files owned by user hadoga and copy them to /root/h-files
-3.4 Find a file named “httpd.conf” and save the absolute paths to /root/httpd-paths.txt
+3.4 Find a file named "httpd.conf" and save the absolute paths to /root/httpd-paths.txt
 
 ## Task 4: Remote Access & File Permissions
 4.1 From node1, SSH into node2 as user hadoga and:

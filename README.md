@@ -68,6 +68,8 @@ Use the same major version as your exam: 9 for the RHEL 9 exam, 10 for the RHEL 
 
 21 tasks across 2 servers in 3 hours, covering the exam objectives. Take it after you finish the labs.
 
+> The mock exam is new and still being tested. If a script or task doesn't work on your setup, please [open an issue](https://github.com/harunaadoga/rhcsa-ex200-exam-labs/issues).
+
 1. [Setup](./mock-exam/setup.md): 3 VMs and 3 scripts
 2. [Exam](./mock-exam/exam.md)
 3. [Solutions](./mock-exam/solutions.md)

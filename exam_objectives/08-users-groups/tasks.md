@@ -7,7 +7,7 @@ Create group `sharegroup` and users:
 - adoga (UID 4444, member of sharegroup)
 
 All users password: `persward`  
-Change adoga’s password to `perfect`
+Change adoga's password to `perfect`
 
 ## Password Policies
 - Minimum password length: 8 characters

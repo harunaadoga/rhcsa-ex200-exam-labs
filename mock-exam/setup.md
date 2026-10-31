@@ -59,6 +59,4 @@ curl -O https://raw.githubusercontent.com/harunaadoga/rhcsa-ex200-exam-labs/main
 bash prep-node2.sh
 ```
 
-If your node2 disks are `/dev/sdb` and `/dev/sdc`, run `sed -i 's/vdc/sdc/g' prep-node2.sh` before running it.
-
 Then open the [exam](./exam.md), start a 3 hour timer, and use the VM consoles.

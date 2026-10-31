@@ -247,6 +247,8 @@ df -h /data
 Same as task 3, on node2.
 
 ### 18. New logical volume
+If your disk is `/dev/sdb`, replace `vdb` with `sdb` in tasks 18 and 19.
+
 16MB x 40 = 640MB, so the LVM partition needs more than 640MB.
 ```bash
 lsblk /dev/vdb

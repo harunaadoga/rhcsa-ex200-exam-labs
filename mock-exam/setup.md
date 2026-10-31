@@ -6,14 +6,14 @@ Used for the objective labs and the mock exam.
 
 | VM | IP | Extra disks |
 |----|----|-------------|
-| node1 | 192.168.70.10 | /dev/vdb 2GB |
-| node2 | 192.168.70.20 | /dev/vdb 2GB, /dev/vdc 1GB |
+| node1 | 192.168.70.10 | one 2GB disk |
+| node2 | 192.168.70.20 | one 2GB disk and one 1GB disk |
 | repo (optional for labs, needed for mock exam) | 192.168.70.5 | none (attach the full DVD ISO as CD/DVD) |
 
 - RHEL 10, Rocky Linux 10 or AlmaLinux 10, minimal install, 2 vCPU, 2GB RAM, 20GB disk each. Use the same distro on all VMs.
 - All on one network: `192.168.70.0/24`, gateway `192.168.70.1`, with internet access. Set the IPs during install.
 - The repo VM needs the **full DVD ISO** (not the boot or minimal ISO), since it copies BaseOS and AppStream from it.
-- Disks may show as `/dev/sdb` and `/dev/sdc` on some hypervisors. If so, use those names instead.
+- Extra disks show up as `/dev/vdb` and `/dev/vdc` on some hypervisors, or `/dev/sdb` and `/dev/sdc` on others. Check with `lsblk` and use the names you see.
 
 ## 2. Prepare node1 and node2
 

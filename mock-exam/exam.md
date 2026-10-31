@@ -30,7 +30,7 @@ Build the lab first: see [setup](./setup.md).
 **1. Networking**
 Configure node1 with:
 - IP address: 192.168.70.10/24
-- Gateway: 192.168.70.1
+- Gateway: 192.168.70.1 (or your lab network's gateway, see the setup guide)
 - DNS: 192.168.70.5
 
 **2. Hostname**

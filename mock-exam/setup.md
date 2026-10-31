@@ -2,36 +2,73 @@
 
 Used for the objective labs and the mock exam.
 
-## 1. Create the VMs
+![Lab topology](../docs/lab-topology.png)
+
+## Before You Start
+
+New to virtual machines? This section covers what you need.
+
+### A computer
+
+- **RAM:** 16GB recommended. With 8GB, give each VM 1.5GB instead of 2GB.
+- **Free disk space:** about 70GB.
+
+### A hypervisor
+
+A hypervisor is software that runs virtual machines (VMs) on your computer. Pick one for your computer. All are free.
+
+| Your computer | Hypervisor |
+|---------------|------------|
+| Windows, Linux or Intel Mac | [VirtualBox](https://www.virtualbox.org/wiki/Downloads) or VMware Workstation / Fusion |
+| Apple Silicon Mac (M1 or newer) | [UTM](https://mac.getutm.app/) |
+| Linux | virt-manager (KVM) |
+| A home server | [Proxmox VE](https://www.proxmox.com/en/downloads) |
+
+### An ISO
+
+The installer image for the OS. Download the **DVD ISO** of RHEL 10, Rocky Linux 10 or AlmaLinux 10 (links in [Resources](../docs/resources.md)).
+
+- Most computers: the **x86_64** ISO
+- Apple Silicon Mac: the **aarch64** (ARM) ISO
+
+Use the same ISO for all VMs.
+
+## 1. Create the Lab Network
+
+Don't put the lab on your home network. Create a separate virtual network in your hypervisor, so the lab gets its own fixed addresses and stays off your home devices.
+
+Create a **NAT network** with:
+
+- **Network:** `192.168.70.0/24`
+- **DHCP:** off, since the VMs use fixed IPs
+
+Then note the network's **gateway address**. Most hypervisors use `192.168.70.1`. VMware may use a different one, so check its NAT settings. Use your gateway wherever this guide says `192.168.70.1`.
+
+Where to find it (menu names vary slightly between versions):
+
+- **VirtualBox:** Network Manager > NAT Networks > Create. Set each VM's network adapter to **NAT Network**.
+- **VMware Workstation:** Edit > Virtual Network Editor > Add Network, type **NAT**, subnet `192.168.70.0`, mask `255.255.255.0`. Check the gateway under NAT Settings.
+- **UTM:** set each VM's Network Mode to **Shared Network**, and set **Guest Network** to `192.168.70.0/24` under advanced settings.
+- **virt-manager:** Edit > Connection Details > Virtual Networks > **+**, mode **NAT**.
+- **Proxmox:** create a Linux bridge (for example `vmbr1`) with address `192.168.70.1/24` and NAT (masquerade) to your main bridge. Attach the VMs to it.
+
+## 2. Create the VMs
 
 | VM | IP | Extra disks |
 |----|----|-------------|
 | node1 | 192.168.70.10 | one 2GB disk |
 | node2 | 192.168.70.20 | one 2GB disk and one 1GB disk |
-| repo (optional for labs, needed for mock exam) | 192.168.70.5 | none (attach the full DVD ISO as CD/DVD) |
+| repo (optional for labs, needed for mock exam) | 192.168.70.5 | none, but keep the DVD ISO attached |
 
-- RHEL 10, Rocky Linux 10 or AlmaLinux 10, minimal install, 2 vCPU, 2GB RAM, 20GB disk each. Use the same distro on all VMs.
-- All on the lab network below. Set each IP during install, with gateway `192.168.70.1` and DNS `1.1.1.1`.
-- The repo VM needs the **full DVD ISO** (not the boot or minimal ISO), since it copies BaseOS and AppStream from it.
-- Extra disks show up as `/dev/vdb` and `/dev/vdc` on some hypervisors, or `/dev/sdb` and `/dev/sdc` on others. Check with `lsblk` and use the names you see.
+For each VM:
 
-### The lab network
+- **Install:** minimal install, 2 vCPU, 2GB RAM, 20GB disk. Set a root password.
+- **Network:** attach it to the lab network. During install, set the IP from the table, netmask `255.255.255.0` (`/24`), gateway `192.168.70.1` and DNS `1.1.1.1`.
+- **Extra disks:** add them in the hypervisor's VM settings. Inside the VM they show up as `/dev/vdb` and `/dev/vdc`, or `/dev/sdb` and `/dev/sdc`, depending on the hypervisor. Check with `lsblk`.
 
-Use a separate virtual network for the lab, not your home network. The scripts expect `192.168.70.0/24` with internet access through NAT. Create a NAT network with these settings in your hypervisor:
+## 3. Prepare node1 and node2
 
-- **Network:** `192.168.70.0/24`
-- **Gateway:** `192.168.70.1` (most hypervisors set this automatically)
-- **DHCP:** off, since the VMs use static IPs
-
-Where to find it (menu names vary slightly between versions):
-
-- **VirtualBox:** Network Manager > NAT Networks > Create. Then set each VM's network adapter to **NAT Network**.
-- **virt-manager (KVM):** Edit > Connection Details > Virtual Networks > **+**, mode **NAT**.
-- **Proxmox:** create a Linux bridge (for example `vmbr1`) with address `192.168.70.1/24` and NAT (masquerade) to your main bridge, then attach the VMs to it.
-
-## 2. Prepare node1 and node2
-
-Run as root on **both** node1 and node2:
+Log in as root on **both** node1 and node2 and run:
 
 ```bash
 cat >> /etc/hosts << 'EOF'
@@ -44,9 +81,9 @@ useradd -G wheel hadoga
 passwd hadoga
 ```
 
-## 3. Set up the repo VM
+## 4. Set Up the Repo VM
 
-Needed for labs 05 and 10, and for the mock exam. Run as root on the repo VM:
+Needed for labs 05 and 10, and for the mock exam. Log in as root on the repo VM and run:
 
 ```bash
 curl -O https://raw.githubusercontent.com/harunaadoga/rhcsa-ex200-exam-labs/main/mock-exam/setup-repo.sh
@@ -55,11 +92,11 @@ bash setup-repo.sh
 
 It prints `repo server ready` when it's done.
 
-## 4. Snapshot node1 and node2
+## 5. Snapshot node1 and node2
 
-Name the snapshot `clean`. You can now start the objective labs.
+A snapshot saves a VM's current state so you can go back to it later. Take one of node1 and node2 and name it `clean`. You can now start the objective labs.
 
-## 5. Mock exam only
+## 6. Mock Exam Only
 
 Revert node1 and node2 to `clean`, then run as root:
 

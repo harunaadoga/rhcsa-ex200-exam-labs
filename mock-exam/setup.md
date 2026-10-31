@@ -11,9 +11,23 @@ Used for the objective labs and the mock exam.
 | repo (optional for labs, needed for mock exam) | 192.168.70.5 | none (attach the full DVD ISO as CD/DVD) |
 
 - RHEL 10, Rocky Linux 10 or AlmaLinux 10, minimal install, 2 vCPU, 2GB RAM, 20GB disk each. Use the same distro on all VMs.
-- All on one network: `192.168.70.0/24`, gateway `192.168.70.1`, with internet access. Set the IPs during install.
+- All on the lab network below. Set each IP during install, with gateway `192.168.70.1` and DNS `1.1.1.1`.
 - The repo VM needs the **full DVD ISO** (not the boot or minimal ISO), since it copies BaseOS and AppStream from it.
 - Extra disks show up as `/dev/vdb` and `/dev/vdc` on some hypervisors, or `/dev/sdb` and `/dev/sdc` on others. Check with `lsblk` and use the names you see.
+
+### The lab network
+
+Use a separate virtual network for the lab, not your home network. The scripts expect `192.168.70.0/24` with internet access through NAT. Create a NAT network with these settings in your hypervisor:
+
+- **Network:** `192.168.70.0/24`
+- **Gateway:** `192.168.70.1` (most hypervisors set this automatically)
+- **DHCP:** off, since the VMs use static IPs
+
+Where to find it (menu names vary slightly between versions):
+
+- **VirtualBox:** Network Manager > NAT Networks > Create. Then set each VM's network adapter to **NAT Network**.
+- **virt-manager (KVM):** Edit > Connection Details > Virtual Networks > **+**, mode **NAT**.
+- **Proxmox:** create a Linux bridge (for example `vmbr1`) with address `192.168.70.1/24` and NAT (masquerade) to your main bridge, then attach the VMs to it.
 
 ## 2. Prepare node1 and node2
 

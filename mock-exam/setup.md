@@ -1,6 +1,6 @@
 # Lab Setup
 
-Used for the objective labs and the mock exam.
+One lab for everything. The objective labs need **node1** and **node2** (plus the **repo** VM for labs 05 and 10). The mock exam needs all three VMs.
 
 ![Lab topology](../docs/lab-topology.png)
 

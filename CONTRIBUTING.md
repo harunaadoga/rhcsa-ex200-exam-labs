@@ -87,4 +87,4 @@ git push origin main
 
 ## Questions
 
-Open an issue, or ask in the comments of any video on the [YouTube playlist](https://www.youtube.com/playlist?list=PLiI_-JOspy6FuSPXSipE0xE4oC2XXYyuI).
+Ask in [Discussions](https://github.com/harunaadoga/rhcsa-ex200-exam-labs/discussions), or in the comments of any video on the [YouTube playlist](https://www.youtube.com/playlist?list=PLiI_-JOspy6FuSPXSipE0xE4oC2XXYyuI).

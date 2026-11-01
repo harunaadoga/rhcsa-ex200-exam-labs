@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
+  - name: Ask a question or start a discussion
+    url: https://github.com/harunaadoga/rhcsa-ex200-exam-labs/discussions
+    about: Questions about the labs, your setup or the exam. No issue needed.
   - name: Watch the video walkthroughs
     url: https://www.youtube.com/playlist?list=PLiI_-JOspy6FuSPXSipE0xE4oC2XXYyuI
     about: Stuck on a task? Every objective has a video solution.

@@ -303,7 +303,7 @@ tuned-adm profile <recommended-profile>
 tuned-adm active
 ```
 
-### 21. Rootless container as a service
+### 21a. RHEL 9: Rootless container as a service
 
 As root:
 ```bash
@@ -343,10 +343,28 @@ podman exec filebox touch /opt/inbox/from-container
 ls -l /srv/reports                             # from-container
 ```
 
+### 21b. RHEL 10: Flatpak
+
+As root. Flatpak commands run as root work system-wide.
+```bash
+dnf install -y flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y flathub org.mozilla.firefox
+```
+> The install also downloads the runtime Firefox needs, so it can take a few minutes.
+
+Verify:
+```bash
+flatpak remotes                                # flathub  system
+flatpak list --app                             # Firefox
+```
+
 ---
 
 ## Final check
 ```bash
 reboot          # both nodes
 ```
-After the reboot, check every task again. As devops on node2, `podman ps` must show `filebox` running.
+After the reboot, check every task again.
+- 21a: as devops on node2, `podman ps` must show `filebox` running.
+- 21b: `flatpak list --app` must show Firefox.

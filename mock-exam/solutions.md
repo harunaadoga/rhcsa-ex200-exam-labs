@@ -7,7 +7,7 @@ Try the [exam](./exam.md) first. Run everything as root unless stated otherwise.
 ## node1
 
 ### 1. Networking
-Use the console: changing the IP drops SSH.
+node1 starts on the wrong network (10.0.0.10), so use the console. Once this is done, SSH works again.
 ```bash
 nmcli con show                          # note the connection name, e.g. enp1s0
 nmcli con mod "enp1s0" ipv4.method manual \

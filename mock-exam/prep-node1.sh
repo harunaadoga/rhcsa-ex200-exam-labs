@@ -37,6 +37,23 @@ systemctl enable httpd
 
 # Remove the temporary repos
 rm -f /etc/yum.repos.d/prep.repo
+
+# Turn off the node's own repos, like the real exam. Only the exam repos should work.
+if command -v subscription-manager >/dev/null; then
+    subscription-manager config --rhsm.manage_repos=0
+fi
+mkdir -p /root/repos-backup
+mv /etc/yum.repos.d/*.repo /root/repos-backup/ 2>/dev/null || true
 dnf clean all
 
+# Task 1: move node1 off the lab network. The exam starts on the console.
+CON=$(nmcli -g NAME,TYPE con show --active | awk -F: '$2 ~ /ethernet/ {print $1; exit}')
+if [ -z "$CON" ]; then
+    echo "No active wired connection found on node1."
+    exit 1
+fi
+nmcli con mod "$CON" ipv4.method manual ipv4.addresses 10.0.0.10/24 ipv4.gateway "" ipv4.dns ""
+
 echo "node1 ready for the mock exam"
+echo "node1 leaves the lab network in 10 seconds. Continue on node1's VM console."
+systemd-run --on-active=10 /usr/bin/nmcli con up "$CON" >/dev/null

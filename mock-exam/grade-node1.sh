@@ -21,6 +21,7 @@ echo "Task 1: Networking"
 check "IP 192.168.70.10/24"       "ip -4 addr | grep -q 'inet 192.168.70.10/24'"
 check "Gateway on 192.168.70.0/24"  "ip route | grep -q '^default via 192\.168\.70\.'"
 check "DNS 192.168.70.5"          "grep -q '^nameserver 192.168.70.5' /etc/resolv.conf"
+check "DNS search rhcsa.home"     "grep -q '^search.*rhcsa.home' /etc/resolv.conf"
 
 echo "Task 2: Hostname"
 check "Hostname servera.rhcsa.home" "[ \"\$(hostnamectl hostname)\" = servera.rhcsa.home ]"

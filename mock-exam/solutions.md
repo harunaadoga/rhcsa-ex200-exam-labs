@@ -14,6 +14,7 @@ nmcli con mod "enp1s0" ipv4.method manual \
   ipv4.addresses 192.168.70.10/24 \
   ipv4.gateway 192.168.70.1 \
   ipv4.dns 192.168.70.5 \
+  ipv4.dns-search rhcsa.home \
   connection.autoconnect yes
 nmcli con up "enp1s0"
 
@@ -25,7 +26,7 @@ cat /etc/resolv.conf
 
 You can also use `nmtui` instead. It is available in the exam, and either tool is fine:
 1. Run `nmtui` and choose **Edit a connection**, then your connection.
-2. Set **IPv4 CONFIGURATION** to **Manual**, then **Show**. Replace the address with `192.168.70.10/24`, set the gateway to `192.168.70.1` and the DNS server to `192.168.70.5`.
+2. Set **IPv4 CONFIGURATION** to **Manual**, then **Show**. Replace the address with `192.168.70.10/24`, set the gateway to `192.168.70.1`, the DNS server to `192.168.70.5` and the search domain to `rhcsa.home`.
 3. Make sure **Automatically connect** is ticked, then choose **OK** and **Back**.
 4. Choose **Activate a connection**, then **Deactivate** and **Activate** your connection to apply the change.
 

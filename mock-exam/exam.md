@@ -36,6 +36,7 @@ node1 is not on the lab network. Use its console. Configure node1 with:
 - IP address: 192.168.70.10/24
 - Gateway: 192.168.70.1 (or your lab network's gateway, see the setup guide)
 - DNS: 192.168.70.5
+- DNS search domain: rhcsa.home
 
 **2. Hostname**
 Set the hostname of node1 to `servera.rhcsa.home`.

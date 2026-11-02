@@ -2,11 +2,14 @@
 
 **Time:** 3 hours. **Tasks:** 21.
 
+Task 21 depends on your exam version: **21a** for the RHEL 9 exam, **21b** for the RHEL 10 exam. Do only the one for your version, on VMs of the same major version.
+
 Build the lab first: see [setup](./setup.md).
 
 ## Rules
 
 - No internet, no notes. `man` pages and `/usr/share/doc` are allowed.
+- The real exam has no internet access. This lab uses it in one place only: Flathub in task 21b. In the real exam you use the repo URL the exam gives you. The commands are the same.
 - All changes must survive a reboot. Reboot both nodes at the end and check your work.
 - Use the VM console. SSH is optional unless a task asks for it.
 - If a task can't be done, move on and come back later.
@@ -20,7 +23,8 @@ Build the lab first: see [setup](./setup.md).
 | Repo server | repo.rhcsa.home |
 | BaseOS | http://repo.rhcsa.home/repo/BaseOS/ |
 | AppStream | http://repo.rhcsa.home/repo/AppStream/ |
-| Container registry | repo.rhcsa.home:5000, user `rhcsa`, password `Passw0rd` |
+| Container registry (21a) | repo.rhcsa.home:5000, user `rhcsa`, password `Passw0rd` |
+| Flatpak remote (21b) | `flathub`: https://dl.flathub.org/repo/flathub.flatpakrepo |
 | Default password for new users | `flamingo` |
 
 ---
@@ -112,13 +116,22 @@ Using the remaining space on the same disk, create a 512MB swap partition and ac
 **20. Tuning profile**
 Set node2 to use the recommended tuned profile.
 
-**21. Rootless container as a service**
+**21. Software for your exam version**
+Do only the one for your exam version.
+
+**21a. RHEL 9: Rootless container as a service**
 As user `devops`:
 - Log in to the registry at `repo.rhcsa.home:5000` and use the image `rhcsa/filebox`
 - Run a container named `filebox`
 - Map host directory `/srv/uploads` to `/opt/outbox` and `/srv/reports` to `/opt/inbox` in the container
 - Files created on the host must be accessible in the container, and the other way round
 - Run it as a systemd user service named `container-filebox` that starts at boot, without `devops` logging in
+
+**21b. RHEL 10: Flatpak**
+Containers are not on the RHEL 10 exam. Flatpak is. As root:
+- Install Flatpak
+- Add the `flathub` remote system-wide
+- Install Firefox (`org.mozilla.firefox`) from `flathub` system-wide
 
 ---
 

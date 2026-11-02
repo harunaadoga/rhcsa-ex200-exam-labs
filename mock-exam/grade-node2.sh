@@ -52,17 +52,25 @@ check "Swap in fstab"             "grep -Eq \"(\$(blkid -s UUID -o value $NEW_SW
 echo "Task 20: Tuning profile"
 check "Recommended profile active" "tuned-adm active | grep -q \"\$(tuned-adm recommend)\""
 
-echo "Task 21: Rootless container"
-DEVOPS_UID=$(id -u devops)
-podman_devops() {
-    runuser -u devops -- env XDG_RUNTIME_DIR=/run/user/$DEVOPS_UID podman "$@"
-}
-check "Linger enabled for devops" "loginctl show-user devops -p Linger | grep -q yes"
-check "Service file exists"       "[ -f /home/devops/.config/systemd/user/container-filebox.service ]"
-check "Service enabled"           "ls /home/devops/.config/systemd/user/default.target.wants/container-filebox.service"
-check "filebox running"           "podman_devops ps --format '{{.Names}}' | grep -qx filebox"
-check "/srv/uploads -> /opt/outbox" "podman_devops inspect filebox --format '{{range .Mounts}}{{.Source}}:{{.Destination}} {{end}}' | grep -q '/srv/uploads:/opt/outbox'"
-check "/srv/reports -> /opt/inbox"  "podman_devops inspect filebox --format '{{range .Mounts}}{{.Source}}:{{.Destination}} {{end}}' | grep -q '/srv/reports:/opt/inbox'"
+MAJOR=$(. /etc/os-release; echo "${VERSION_ID%%.*}")
+if [ "$MAJOR" -ge 10 ]; then
+    echo "Task 21b: Flatpak (RHEL 10)"
+    check "flatpak installed"           "rpm -q flatpak"
+    check "flathub remote, system-wide" "flatpak remotes --system --columns=name | grep -qx flathub"
+    check "Firefox installed, system-wide" "flatpak list --system --app --columns=application | grep -qx org.mozilla.firefox"
+else
+    echo "Task 21a: Rootless container (RHEL 9)"
+    DEVOPS_UID=$(id -u devops)
+    podman_devops() {
+        runuser -u devops -- env XDG_RUNTIME_DIR=/run/user/$DEVOPS_UID podman "$@"
+    }
+    check "Linger enabled for devops" "loginctl show-user devops -p Linger | grep -q yes"
+    check "Service file exists"       "[ -f /home/devops/.config/systemd/user/container-filebox.service ]"
+    check "Service enabled"           "ls /home/devops/.config/systemd/user/default.target.wants/container-filebox.service"
+    check "filebox running"           "podman_devops ps --format '{{.Names}}' | grep -qx filebox"
+    check "/srv/uploads -> /opt/outbox" "podman_devops inspect filebox --format '{{range .Mounts}}{{.Source}}:{{.Destination}} {{end}}' | grep -q '/srv/uploads:/opt/outbox'"
+    check "/srv/reports -> /opt/inbox"  "podman_devops inspect filebox --format '{{range .Mounts}}{{.Source}}:{{.Destination}} {{end}}' | grep -q '/srv/reports:/opt/inbox'"
+fi
 
 echo
 echo "Score: $PASS passed, $FAIL failed"

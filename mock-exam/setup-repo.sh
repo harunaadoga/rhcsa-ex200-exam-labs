@@ -50,7 +50,7 @@ echo "local stratum 10" >> /etc/chrony.conf
 systemctl enable chronyd
 systemctl restart chronyd
 
-# Container registry, login rhcsa / Passw0rd (task 21)
+# Container registry, login rhcsa / Passw0rd (task 21a, RHEL 9)
 mkdir -p /opt/registry/auth /opt/registry/data
 htpasswd -Bbc /opt/registry/auth/htpasswd rhcsa Passw0rd
 podman run -d --name registry --restart=always -p 5000:5000 \
@@ -62,7 +62,7 @@ podman run -d --name registry --restart=always -p 5000:5000 \
   docker.io/library/registry:2
 systemctl enable podman-restart.service
 
-# Image for task 21
+# Image for task 21a (RHEL 9)
 mkdir -p /root/filebox
 cat > /root/filebox/Containerfile << 'EOF'
 FROM registry.access.redhat.com/ubi9/ubi-minimal

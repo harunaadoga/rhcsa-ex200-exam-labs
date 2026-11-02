@@ -34,7 +34,7 @@ echo "/dev/datavg/datalv  /data  ext4  defaults  0 0" >> /etc/fstab
 systemctl daemon-reload
 mount -a
 
-# Task 21: container user, and allow the HTTP registry
+# Task 21a (RHEL 9): container user, and allow the HTTP registry
 useradd devops
 echo "devops:flamingo" | chpasswd
 mkdir -p /etc/containers/registries.conf.d

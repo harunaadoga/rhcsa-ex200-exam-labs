@@ -63,9 +63,11 @@ Where to find it (menu names vary slightly between versions):
 
 For each VM:
 
-- **Install:** minimal install, 2 vCPU, 2GB RAM, 20GB disk. Set a root password.
+- **Install:** minimal install, 2 vCPU, 2GB RAM, 20GB disk. Set a root password, and set the hostname to `node1.rhcsa.home`, `node2.rhcsa.home` or `repo.rhcsa.home`.
 - **Network:** attach it to the lab network. During install, set the IP from the table, netmask `255.255.255.0` (`/24`), gateway `192.168.70.1` and DNS `1.1.1.1`.
 - **Extra disks:** add them in the hypervisor's VM settings. Inside the VM they show up as `/dev/vdb` and `/dev/vdc`, or `/dev/sdb` and `/dev/sdc`, depending on the hypervisor. Check with `lsblk`.
+
+Then take a snapshot of all three VMs named `fresh`. A snapshot saves a VM's current state so you can go back to it. If anything in steps 3 or 4 goes wrong, revert to `fresh` and start that step again.
 
 ## 3. Prepare node1 and node2
 
@@ -82,6 +84,8 @@ useradd -G wheel hadoga
 passwd hadoga
 ```
 
+If you already created `hadoga` during install, skip `useradd` and run `usermod -aG wheel hadoga` instead.
+
 ## 4. Set Up the Repo VM
 
 Needed for labs 05 and 10, and for the mock exam. Log in as root on the repo VM and run:
@@ -91,11 +95,13 @@ curl -O https://raw.githubusercontent.com/harunaadoga/rhcsa-ex200-exam-labs/main
 bash setup-repo.sh
 ```
 
-It prints `repo server ready` when it's done.
+It takes a few minutes and prints `repo server ready` when it's done. If it fails, revert the repo VM to `fresh`, fix the cause and run it again.
 
-## 5. Snapshot node1 and node2
+## 5. Snapshot All Three VMs
 
-A snapshot saves a VM's current state so you can go back to it later. Take one of node1 and node2 and name it `clean`. You can now start the objective labs.
+Take a snapshot of all three VMs named `clean`. You can now start the objective labs.
+
+Broke a VM during a lab? Revert it to `clean`.
 
 ## 6. Mock Exam Only
 

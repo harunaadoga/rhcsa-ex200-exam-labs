@@ -56,4 +56,4 @@ nmcli con mod "$CON" ipv4.method manual ipv4.addresses 10.0.0.10/24 ipv4.gateway
 
 echo "node1 ready for the mock exam"
 echo "node1 leaves the lab network in 10 seconds. Continue on node1's VM console."
-systemd-run --on-active=10 /usr/bin/nmcli con up "$CON" >/dev/null
+systemd-run --on-active=10 /usr/bin/nmcli con up "$CON" >/dev/null 2>&1

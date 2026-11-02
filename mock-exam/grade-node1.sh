@@ -47,9 +47,6 @@ check "lucas password flamingo"   "pw lucas flamingo"
 
 echo "Task 6: Password aging"
 check "PASS_MAX_DAYS 25 in login.defs" "grep -Eq '^PASS_MAX_DAYS[[:space:]]+25$' /etc/login.defs"
-for u in james olivia emma lucas; do
-    check "$u max age 25 days"    "chage -l $u | grep Maximum | grep -q ': 25$'"
-done
 
 echo "Task 7: Find files"
 check "daniel's files copied"     "ls /root/daniel-files/daniel_notes /root/daniel-files/daniel_report /root/daniel-files/daniel_data"

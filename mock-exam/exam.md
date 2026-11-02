@@ -56,7 +56,7 @@ Configure BaseOS and AppStream from the URLs above as the default repositories o
 Create user `lucas` with UID `3456` and password `flamingo`.
 
 **6. Password aging**
-Passwords for all new users must expire after 25 days.
+Passwords for all users created from now on must expire after 25 days. Existing users don't need to change.
 
 **7. Find files**
 Find all files owned by user `daniel` and copy them to `/root/daniel-files`. The user already exists.

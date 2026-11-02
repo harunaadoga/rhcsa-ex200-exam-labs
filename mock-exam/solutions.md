@@ -97,17 +97,11 @@ For users created from now on:
 vi /etc/login.defs
 PASS_MAX_DAYS   25
 ```
-The users from tasks 4 and 5 already exist, so set them too:
+Verify:
 ```bash
-chage -M 25 james
-chage -M 25 olivia
-chage -M 25 emma
-chage -M 25 lucas
-
-# Verify
-chage -l james
+grep ^PASS_MAX_DAYS /etc/login.defs     # PASS_MAX_DAYS   25
 ```
-> Doing this task before task 4 saves the `chage` step. On the exam, read all tasks first.
+> The task asks for users created from now on, so existing users don't need changing.
 
 ### 7. Find files
 ```bash

@@ -23,6 +23,14 @@ ip route
 cat /etc/resolv.conf
 ```
 
+You can also use `nmtui` instead. It is available in the exam, and either tool is fine:
+1. Run `nmtui` and choose **Edit a connection**, then your connection.
+2. Set **IPv4 CONFIGURATION** to **Manual**, then **Show**. Replace the address with `192.168.70.10/24`, set the gateway to `192.168.70.1` and the DNS server to `192.168.70.5`.
+3. Make sure **Automatically connect** is ticked, then choose **OK** and **Back**.
+4. Choose **Activate a connection**, then **Deactivate** and **Activate** your connection to apply the change.
+
+Then run the same verify commands.
+
 ### 2. Hostname
 ```bash
 hostnamectl set-hostname servera.rhcsa.home

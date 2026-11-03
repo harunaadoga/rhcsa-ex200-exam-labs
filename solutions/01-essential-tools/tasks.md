@@ -64,8 +64,8 @@ ls -l /var/tmp/twenty | head
 
 ### 3.3 Files owned by user hadoga
 ```bash
-mkdir -p /root/h-files
-find / -type f -user hadoga -not -path "/proc/*" -exec cp {} /root/h-files/ \; 2>/dev/null
+mkdir /root/h-files
+find / -type f -user hadoga -exec cp {} /root/h-files/ \;
 
 # Verify
 ls -la /root/h-files
@@ -73,7 +73,7 @@ ls -la /root/h-files
 
 ### 3.4 Absolute paths of httpd.conf
 ```bash
-find / -type f -name httpd.conf 2>/dev/null > /root/httpd-paths.txt
+find / -type f -name httpd.conf > /root/httpd-paths.txt
 
 # Verify
 cat /root/httpd-paths.txt

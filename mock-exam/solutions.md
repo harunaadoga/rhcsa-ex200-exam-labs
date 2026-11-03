@@ -102,11 +102,14 @@ Verify:
 grep ^PASS_MAX_DAYS /etc/login.defs     # PASS_MAX_DAYS   25
 ```
 > The task asks for users created from now on, so existing users don't need changing.
+>
+> In the real exam the task may only say "set the password age to 25 days", without saying new or existing users. Then do both: set `PASS_MAX_DAYS` in `/etc/login.defs`, and run `chage -M` on the users that already exist.
 
 ### 7. Find files
+Create the directory first. Copying into a directory that doesn't exist fails, or creates a single file instead. If `find` prints messages about `/proc`, ignore them. The copy still works.
 ```bash
-mkdir -p /root/daniel-files
-find / -type f -user daniel -not -path "/proc/*" -exec cp {} /root/daniel-files/ \; 2>/dev/null
+mkdir /root/daniel-files
+find / -type f -user daniel -exec cp {} /root/daniel-files/ \;
 
 # Verify
 ls -l /root/daniel-files

@@ -128,30 +128,46 @@ ls -l /home/teamwork/test               # group is teamgrp
 ```
 
 ### 9. Web server
-Three problems: the SELinux port, the file's SELinux context, and the file permissions.
-```bash
-systemctl status httpd                  # fails to start
+Three problems: the SELinux port, the file's permissions, and the file's SELinux context. Find them one at a time: try it, read the error, fix it.
 
-# SELinux port
+**1. Try to start httpd**
+```bash
+systemctl start httpd                   # fails
+journalctl -u httpd --no-pager -n 20    # Permission denied ... make_sock ... :84
+```
+SELinux only lets httpd use the ports in `http_port_t`, and 84 isn't one of them.
+
+**2. Allow port 84 in SELinux, then start httpd**
+```bash
 dnf install -y policycoreutils-python-utils
+semanage port -l | grep http_port_t     # 84 is not in the list
 semanage port -a -t http_port_t -p tcp 84
 
-# File context (the file was moved from /root)
-ls -Z /var/www/html/page1.html          # admin_home_t
-restorecon -v /var/www/html/page1.html
-ls -Z /var/www/html/page1.html          # httpd_sys_content_t
+systemctl enable --now httpd
+systemctl status httpd                  # active (running)
+```
 
-# Permissions
-ls -l /var/www/html/page1.html          # -rw-------
+**3. Try the page**
+```bash
+curl http://localhost:84/page1.html     # 403 Forbidden
+ls -lZ /var/www/html/page1.html         # -rw------- ... admin_home_t
+```
+Two problems: only root can read the file, and its SELinux label is wrong because it was moved from /root.
+```bash
 chmod 644 /var/www/html/page1.html
+restorecon -v /var/www/html/page1.html
 
-# Firewall and service
+curl http://localhost:84/page1.html     # mock exam passed
+```
+
+**4. Open the firewall for other hosts**
+```bash
 firewall-cmd --permanent --add-port=84/tcp
 firewall-cmd --reload
-systemctl enable --now httpd
-
-# Verify
-curl http://servera.rhcsa.home:84/page1.html
+```
+Verify from node2:
+```bash
+curl http://servera.rhcsa.home:84/page1.html   # mock exam passed
 ```
 
 ### 10. Search text

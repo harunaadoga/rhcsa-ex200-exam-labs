@@ -30,44 +30,45 @@ ssh root@node2              # logs in with no password prompt
 
 ## HTTPD + SELinux (node1)
 
+Set the port, try to start httpd, read the error, fix it.
+
+### Set the port
 ```bash
 dnf install -y httpd policycoreutils-python-utils
 
 vi /etc/httpd/conf/httpd.conf
 Listen 85
+
+systemctl start httpd                   # fails
+journalctl -u httpd --no-pager -n 20    # Permission denied ... make_sock ... :85
 ```
+SELinux only lets httpd use the ports in `http_port_t`, and 85 isn't one of them.
 
 ### Allow port 85 in SELinux
 ```bash
+semanage port -l | grep http_port_t     # 85 is not in the list
 semanage port -a -t http_port_t -p tcp 85
-
-# Verify
-semanage port -l | grep http_port_t    # 85 in the list
+semanage port -l | grep http_port_t     # 85 is in the list
 ```
+> Forgot the syntax? `man semanage-port` has it under EXAMPLES.
 
-### Fix /var/www/html context
+### Start httpd
 ```bash
-ls -Zd /var/www/html        # should be httpd_sys_content_t
-restorecon -Rv /var/www/html
-echo "RHCSA works" > /var/www/html/index.html
-ls -Z /var/www/html/index.html
+systemctl enable --now httpd
+systemctl status httpd                  # active (running)
 ```
 
-### Firewall and service
+### Check the /var/www/html context
+```bash
+ls -Zd /var/www/html                    # httpd_sys_content_t
+restorecon -Rv /var/www/html            # fixes it if it's wrong
+echo "RHCSA works" > /var/www/html/index.html
+```
+
+### Open the firewall and test
 ```bash
 firewall-cmd --permanent --add-port=85/tcp
 firewall-cmd --reload
 
-systemctl enable --now httpd
-
-# Verify
-systemctl status httpd
-ss -tlnp | grep 85
-curl http://192.168.70.10:85
-```
-
-### If httpd won't start
-```bash
-journalctl -u httpd
-ausearch -m avc -ts recent  # SELinux denials
+curl http://192.168.70.10:85             # RHCSA works
 ```

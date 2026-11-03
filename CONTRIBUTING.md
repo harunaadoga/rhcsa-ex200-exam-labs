@@ -6,8 +6,10 @@ Thanks for helping make this the best free RHCSA practice resource. Every fix, n
 
 - **Report a problem:** a wrong command, a broken link, a task that doesn't work on RHEL, Rocky Linux or AlmaLinux 9 or 10. [Open an issue](https://github.com/harunaadoga/rhcsa-ex200-exam-labs/issues/new).
 - **Fix something:** typos, unclear wording, incorrect solutions.
-- **Add tasks:** new practice tasks for an existing objective, with a matching solution.
+- **Add tasks (after v1.0):** extra practice tasks for an existing objective, with a matching solution. They go under an **Extra practice (no video)** heading at the end of the lab, since each lab follows a video.
 - **Share your experience:** passed the exam using these labs? Tell us in an issue. It helps others.
+
+The mock exam is maintained by the repo owner. Please report problems with it, but don't submit new mock exam tasks.
 
 ## Ground Rules
 

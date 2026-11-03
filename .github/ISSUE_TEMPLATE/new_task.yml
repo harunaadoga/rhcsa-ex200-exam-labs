@@ -18,7 +18,6 @@ body:
         - 09 Security
         - 10 Containers (RHEL 9)
         - 11 Manage Software (RHEL 10)
-        - Mock exam
     validations:
       required: true
   - type: textarea

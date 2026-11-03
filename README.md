@@ -99,4 +99,4 @@ If these labs helped you prepare or pass, **give the repo a ⭐** and share it w
 
 ## License
 
-[GPL-3.0](./LICENSE)
+Copyright (C) 2025-2026 Haruna Adoga. Licensed under [GPL-3.0](./LICENSE).

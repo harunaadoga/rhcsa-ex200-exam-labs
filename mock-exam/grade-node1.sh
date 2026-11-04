@@ -78,7 +78,7 @@ echo "Task 14: Autofs"
 check "netuser1 UID 3001"         "[ \"\$(id -u netuser1)\" = 3001 ]"
 check "netuser1 home /remotehome/netuser1" "getent passwd netuser1 | cut -d: -f6 | grep -qx /remotehome/netuser1"
 check "autofs enabled"            "systemctl is-enabled autofs"
-check "Home mounts over NFS"      "ls /remotehome/netuser1 && findmnt -n /remotehome/netuser1 | grep -q 'repo.rhcsa.home:/home/netuser1'"
+check "Home mounts over NFS"      "runuser -u netuser1 -- ls /remotehome/netuser1 && findmnt -n /remotehome/netuser1 | grep -Eq '(repo.rhcsa.home|192.168.70.5):/home/netuser1'"
 
 echo
 echo "Score: $PASS passed, $FAIL failed"

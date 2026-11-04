@@ -58,3 +58,5 @@ exit
 
 mount | grep netdir         # shows the NFS mount
 ```
+
+> As root, `ls /mnt/netdir/bobby` says Permission denied. That's normal: the NFS server treats root from other machines as an unknown user. Test as `bobby`, as above.

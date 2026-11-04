@@ -251,6 +251,8 @@ touch testfile
 exit
 ```
 
+> As root, `ls /remotehome/netuser1` says Permission denied. That's normal: the NFS server treats root from other machines as an unknown user. Test as `netuser1`, as above.
+
 ---
 
 ## node2

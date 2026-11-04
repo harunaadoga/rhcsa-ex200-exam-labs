@@ -377,6 +377,8 @@ Add this line at the end, then save and quit:
 ```
 /dev/sdb2  swap  swap  defaults  0 0
 ```
+> You can use the UUID instead of the device path. Both work. Run `blkid /dev/sdb2` and use `UUID=<uuid>  swap  swap  defaults  0 0`.
+
 ```bash
 systemctl daemon-reload
 swapon -a
@@ -389,11 +391,14 @@ swapon                                  # /dev/sdb2 512M, plus the existing swap
 ```bash
 dnf install -y tuned
 systemctl enable --now tuned
-tuned-adm recommend
-tuned-adm profile <recommended-profile>
+tuned-adm recommend                     # virtual-guest on most VMs
+```
+Set the profile it shows. For example, if it shows `virtual-guest`:
+```bash
+tuned-adm profile virtual-guest
 
 # Verify
-tuned-adm active
+tuned-adm active                        # Current active profile: virtual-guest
 ```
 
 ### 21a. RHEL 9: Rootless container as a service

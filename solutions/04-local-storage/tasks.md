@@ -59,6 +59,8 @@ Add this line at the end, then save and quit:
 ```
 /dev/vdb2  swap  swap  defaults  0 0
 ```
+> You can use the UUID instead of the device path. Both work. Run `blkid /dev/vdb2` and use `UUID=<uuid>  swap  swap  defaults  0 0`.
+
 ```bash
 systemctl daemon-reload
 swapon -a

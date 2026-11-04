@@ -258,10 +258,17 @@ exit
 ## node2
 
 ### 15. Root password
-1. Reboot node2. At the GRUB menu press `e` on the default entry
-2. Add `rd.break` to the end of the line starting with `linux`
-3. Press `Ctrl+x`
-4. Then:
+Use the VM console, not SSH. You need to see the screen from the moment it boots.
+
+**Open the GRUB editor (RHEL 9 and 10)**
+1. Reboot the VM from its console.
+2. When the boot menu appears, press the Down arrow to stop the countdown, then Up to go back to the top entry. The top entry is your normal kernel. Don't use the rescue entry.
+3. Press `e`. Move down to the line that starts with `linux` and press `Ctrl+e` to jump to the end of it.
+
+**RHEL 9: `rd.break`**
+
+4. Type a space and `rd.break`, then press `Ctrl+x`.
+5. At the `switch_root:/#` prompt:
 ```bash
 mount -o remount,rw /sysroot
 chroot /sysroot
@@ -270,7 +277,21 @@ touch /.autorelabel
 exit
 exit
 ```
-Wait for the relabel and reboot, then log in with `flamingo`.
+
+**RHEL 10: `init=/bin/bash`**
+
+On RHEL 10, `rd.break` asks for the root password, so use this instead. It works on RHEL 9 too.
+
+4. Type a space and `init=/bin/bash`, then press `Ctrl+x`.
+5. At the `bash-5.2#` prompt:
+```bash
+mount -o remount,rw /
+passwd root                             # flamingo
+touch /.autorelabel
+exec /sbin/init
+```
+
+Nothing shows on screen while you type the password. That's normal. The SELinux relabel runs and the VM reboots by itself. Then log in as root with `flamingo`.
 
 ### 16. Resize a logical volume
 ```bash

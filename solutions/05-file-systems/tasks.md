@@ -31,13 +31,20 @@ grep bobby /etc/passwd      # home is /mnt/netdir/bobby
 ### Configure autofs
 ```bash
 dnf install -y autofs nfs-utils
-
 vi /etc/auto.master.d/netdir.autofs
+```
+Add this line, then save and quit:
+```
 /mnt/netdir  /etc/auto.netdir
-
+```
+```bash
 vi /etc/auto.netdir
+```
+Add this line, then save and quit:
+```
 bobby  -rw,sync  repo.rhcsa.home:/home/bobby
-
+```
+```bash
 systemctl enable --now autofs
 ```
 

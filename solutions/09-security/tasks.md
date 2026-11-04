@@ -10,6 +10,9 @@ grep -r PermitRootLogin /etc/ssh/sshd_config /etc/ssh/sshd_config.d/
 Set it in the first file that has it, or in sshd_config if no drop-in file has it:
 ```bash
 vi /etc/ssh/sshd_config
+```
+Set this line, removing the `#` if it has one, then save and quit:
+```
 PermitRootLogin yes
 ```
 ```bash
@@ -35,10 +38,13 @@ Set the port, try to start httpd, read the error, fix it.
 ### Set the port
 ```bash
 dnf install -y httpd policycoreutils-python-utils
-
 vi /etc/httpd/conf/httpd.conf
+```
+Change the `Listen 80` line to this, then save and quit:
+```
 Listen 85
-
+```
+```bash
 systemctl start httpd                   # fails
 journalctl -u httpd --no-pager -n 20    # Permission denied ... make_sock ... :85
 ```

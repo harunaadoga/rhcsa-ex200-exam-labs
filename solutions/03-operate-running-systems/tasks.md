@@ -34,11 +34,15 @@ tuned-adm active
 ### SELinux permissive on node2
 ```bash
 setenforce 0                # now
-vi /etc/selinux/config      # persistent, set:
+vi /etc/selinux/config      # persistent
+```
+Change the `SELINUX` line to this, then save and quit:
+```
 SELINUX=permissive
-
+```
+```bash
 # Verify
-getenforce
+getenforce                  # Permissive
 ```
 
 ### Network service on node1

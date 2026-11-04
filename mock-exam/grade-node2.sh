@@ -52,7 +52,7 @@ check "Swap in fstab"             "grep -Eq \"(\$(blkid -s UUID -o value $NEW_SW
 echo "Task 20: Tuning profile"
 check "Recommended profile active" "tuned-adm active | grep -q \"\$(tuned-adm recommend)\""
 
-# Task 21 is graded for your OS version. To grade the other one: EXAM=9 bash grade-node2.sh
+# Task 21 is graded for your OS version. To grade the other one: EXAM=9 bash /root/grade-node2.sh
 MAJOR=${EXAM:-$(. /etc/os-release; echo "${VERSION_ID%%.*}")}
 if [ "$MAJOR" -ge 10 ]; then
     echo "Task 21b: Flatpak (RHEL 10)"

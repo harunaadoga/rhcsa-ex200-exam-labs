@@ -134,8 +134,8 @@ Containers are not on the RHEL 10 exam. Flatpak is. As root:
 - Add the `flathub` remote system-wide
 - Install Firefox (`org.mozilla.firefox`) from `flathub` system-wide
 
-Practising both? The grader marks the version of your VMs. To grade the other one, run `EXAM=9 bash grade-node2.sh` or `EXAM=10 bash grade-node2.sh`.
+Practising both? The grader marks the version of your VMs. To grade the other one, run `EXAM=9 bash /root/grade-node2.sh` or `EXAM=10 bash /root/grade-node2.sh`.
 
 ---
 
-**Finished?** Reboot both nodes, then grade yourself as root: run `bash grade-node1.sh` on node1 and `bash grade-node2.sh` on node2. Then compare with the [solutions](./solutions.md).
+**Finished?** Reboot both nodes, then grade yourself as root: run `bash /root/grade-node1.sh` on node1 and `bash /root/grade-node2.sh` on node2. The prep scripts saved them there. Then compare with the [solutions](./solutions.md).

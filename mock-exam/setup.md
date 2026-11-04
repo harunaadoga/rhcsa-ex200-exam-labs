@@ -122,6 +122,7 @@ bash prep-node2.sh
 What the prep scripts do, like the real exam:
 
 - They turn off each node's own repos (saved in `/root/repos-backup`), so only the exam repos work.
+- They save the grader in `/root` (`grade-node1.sh`, `grade-node2.sh`), so you can grade without internet when you finish.
 - `prep-node1.sh` ends by moving node1 off the lab network. If you ran it over SSH, the session freezes 10 seconds later. Press `Enter`, then type `~.` to close it. Fixing the network is task 1.
 
 Then open the [exam](./exam.md), start a 3 hour timer, and use the VM consoles.

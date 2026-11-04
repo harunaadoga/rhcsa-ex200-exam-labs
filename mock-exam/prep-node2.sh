@@ -54,4 +54,7 @@ mkdir -p /root/repos-backup
 mv /etc/yum.repos.d/*.repo /root/repos-backup/ 2>/dev/null || true
 dnf clean all
 
+# Save the grader now, while there is internet (node1 loses it in task 1)
+curl -sf -o /root/grade-node2.sh https://raw.githubusercontent.com/harunaadoga/rhcsa-ex200-exam-labs/main/mock-exam/grade-node2.sh
+
 echo "node2 ready for the mock exam"

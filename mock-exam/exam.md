@@ -121,7 +121,7 @@ Set node2 to use the recommended tuned profile.
 Do only the one for your exam version.
 
 **21a. RHEL 9: Rootless container as a service**
-As user `devops`:
+As user `devops` (already exists, password `flamingo`):
 - Log in to the registry at `repo.rhcsa.home:5000` and use the image `rhcsa/filebox`
 - Run a container named `filebox`
 - Map host directory `/srv/uploads` to `/opt/outbox` and `/srv/reports` to `/opt/inbox` in the container

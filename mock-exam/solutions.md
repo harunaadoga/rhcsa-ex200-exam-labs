@@ -411,10 +411,12 @@ chown devops:devops /srv/uploads /srv/reports
 loginctl enable-linger devops
 ```
 
-As devops. Log in with SSH, not `su`, or `systemctl --user` fails:
+Log in as devops with SSH, not `su`, or `systemctl --user` fails. The password is `flamingo`:
 ```bash
 ssh devops@node2
-
+```
+Then, as devops:
+```bash
 podman login -u rhcsa -p Passw0rd repo.rhcsa.home:5000
 podman run -d --name filebox \
   -v /srv/uploads:/opt/outbox:Z \
@@ -449,7 +451,7 @@ dnf install -y flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub org.mozilla.firefox
 ```
-> The install also downloads the runtime Firefox needs, so it can take a few minutes.
+> The install also downloads the runtime Firefox needs, about 500MB, so it can take a few minutes.
 
 Verify:
 ```bash

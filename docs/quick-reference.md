@@ -32,12 +32,18 @@ done
 
 ## Operate Running Systems
 ```bash
-# Reset root password: at GRUB press e, add rd.break to the linux line, Ctrl+x
+# Reset root password: VM console, reboot, at GRUB press e, Ctrl+e on the linux line
+# RHEL 9: add rd.break, Ctrl+x
 mount -o remount,rw /sysroot
 chroot /sysroot
 passwd root
 touch /.autorelabel
 exit; exit
+# RHEL 10: add init=/bin/bash, Ctrl+x
+mount -o remount,rw /
+passwd root
+touch /.autorelabel
+exec /sbin/init
 
 systemctl enable --now service          # start now and at boot
 systemctl set-default multi-user.target # boot target

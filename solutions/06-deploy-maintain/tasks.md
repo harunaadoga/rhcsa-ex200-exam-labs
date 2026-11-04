@@ -40,6 +40,7 @@ cat /at-files/at.txt
 ```bash
 vi /etc/yum.repos.d/rhcsa.repo
 ```
+Add these lines, then save and quit:
 ```ini
 [BaseOS]
 name=BaseOS

@@ -44,6 +44,7 @@ hostname
 ```bash
 vi /etc/yum.repos.d/rhcsa.repo
 ```
+Add these lines, then save and quit:
 ```ini
 [BaseOS]
 name=BaseOS
@@ -306,7 +307,30 @@ df -h /data
 > XFS can grow but not shrink. If the task asks you to make an XFS volume smaller, it can't be done in place.
 
 ### 17. Repositories
-Same as task 3, on node2.
+On node2:
+```bash
+vi /etc/yum.repos.d/rhcsa.repo
+```
+Add these lines, then save and quit:
+```ini
+[BaseOS]
+name=BaseOS
+baseurl=http://repo.rhcsa.home/repo/BaseOS/
+enabled=1
+gpgcheck=0
+
+[AppStream]
+name=AppStream
+baseurl=http://repo.rhcsa.home/repo/AppStream/
+enabled=1
+gpgcheck=0
+```
+```bash
+dnf clean all
+
+# Verify
+dnf repolist                            # BaseOS and AppStream
+```
 
 ### 18. New logical volume
 If your disk is `/dev/sdb`, replace `vdb` with `sdb` in tasks 18 and 19.

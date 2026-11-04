@@ -53,23 +53,18 @@ df -h /mnt/devops_lv
 
 ```bash
 mkswap /dev/vdb2
-blkid /dev/vdb2             # copy the UUID
-```
-
-```bash
 vi /etc/fstab
 ```
-Add this line at the end, with your UUID, then save and quit:
+Add this line at the end, then save and quit:
 ```
-UUID=<uuid-from-blkid>  none  swap  defaults  0 0
+/dev/vdb2  swap  swap  defaults  0 0
 ```
-
 ```bash
 systemctl daemon-reload
 swapon -a
 
 # Verify
-swapon --show               # /dev/vdb2 800M
+swapon                      # /dev/vdb2 800M
 free -h
 ```
 

@@ -371,19 +371,18 @@ df -hT /mnt/payroll                     # ext3
 parted /dev/sdb mkpart swap linux-swap 801MiB 1313MiB
 udevadm settle
 mkswap /dev/sdb2
-blkid /dev/sdb2                         # copy the UUID
 vi /etc/fstab
 ```
-Add this line at the end, with your UUID, then save and quit:
+Add this line at the end, then save and quit:
 ```
-UUID=<uuid>  none  swap  defaults  0 0
+/dev/sdb2  swap  swap  defaults  0 0
 ```
 ```bash
 systemctl daemon-reload
 swapon -a
 
 # Verify
-swapon --show                           # /dev/sdb2 512M plus the existing swap
+swapon                                  # /dev/sdb2 512M, plus the existing swap
 ```
 
 ### 20. Tuning profile

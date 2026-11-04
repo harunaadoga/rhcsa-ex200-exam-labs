@@ -68,7 +68,7 @@ Use the same major version as your exam: 9 for the RHEL 9 exam, 10 for the RHEL 
 
 21 tasks across 2 servers in 3 hours, covering the exam objectives. Task 21 has a RHEL 9 version (containers) and a RHEL 10 version (Flatpak). Take it after you finish the labs.
 
-> The mock exam is new and still being tested. If a script or task doesn't work on your setup, please [open an issue](https://github.com/harunaadoga/rhcsa-ex200-exam-labs/issues).
+> If a script or task doesn't work on your setup, please [open an issue](https://github.com/harunaadoga/rhcsa-ex200-exam-labs/issues).
 
 1. [Setup](./mock-exam/setup.md): 3 VMs and 3 scripts
 2. [Exam](./mock-exam/exam.md)
@@ -78,6 +78,8 @@ Use the same major version as your exam: 9 for the RHEL 9 exam, 10 for the RHEL 
 ## Staying Up to Date
 
 The labs get fixes and updates. If you forked this repo, click **Sync fork** on your fork's page to get the latest changes. If you cloned it, run `git pull`.
+
+To get notified of new versions, click **Watch** > **Custom** > **Releases** at the top of this page.
 
 ---
 

@@ -19,6 +19,9 @@ lsblk /dev/vdb              # vdb1 = 1G, vdb2 = 800M
 
 ## Task 1: LVM Setup
 
+20MB x 32 = 640MB, so the LV is 640MB.
+> Not sure of the maths? Bash can do it: `echo $((20*32))` prints `640`.
+
 ```bash
 pvcreate /dev/vdb1
 vgcreate -s 20M devops_vg /dev/vdb1

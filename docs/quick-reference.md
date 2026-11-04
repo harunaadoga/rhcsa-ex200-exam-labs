@@ -67,14 +67,13 @@ vgcreate -s 16M myvg /dev/vdb1          # -s = extent size
 lvcreate -l 40 -n mylv myvg             # -l extents, -L size
 mkfs.ext4 /dev/myvg/mylv
 mkswap /dev/vdb2
-blkid                                   # UUIDs for fstab
-swapon -a; swapon --show
+swapon -a; swapon
 ```
 
 `/etc/fstab`:
 ```
 /dev/myvg/mylv   /mnt/data   ext4   defaults   0 0
-UUID=<uuid>      none        swap   defaults   0 0
+/dev/vdb2        swap        swap   defaults   0 0
 ```
 ```bash
 systemctl daemon-reload

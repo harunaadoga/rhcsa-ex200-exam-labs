@@ -65,7 +65,7 @@ For each VM:
 
 - **Install:** minimal install, 2 vCPU, 2GB RAM, 20GB disk. Set a root password, and set the hostname to `node1.rhcsa.home`, `node2.rhcsa.home` or `repo.rhcsa.home`.
 - **Network:** attach it to the lab network. During install, set the IP from the table, netmask `255.255.255.0` (`/24`), gateway `192.168.70.1` and DNS `1.1.1.1`.
-- **Extra disks:** add them in the hypervisor's VM settings. Inside the VM they show up as `/dev/vdb` and `/dev/vdc`, or `/dev/sdb` and `/dev/sdc`, depending on the hypervisor. Check with `lsblk`.
+- **Extra disks:** add them in the hypervisor's VM settings. Inside the VM they show up as `/dev/sdb` and `/dev/sdc`, or `/dev/vdb` and `/dev/vdc` on virt-manager and UTM. On VMware, pick SCSI or SATA as the disk type, not NVMe. Check with `lsblk`.
 
 Then take a snapshot of all three VMs named `fresh`. A snapshot saves a VM's current state so you can go back to it. If anything in steps 3 or 4 goes wrong, revert to `fresh` and start that step again.
 

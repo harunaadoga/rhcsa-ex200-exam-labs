@@ -333,20 +333,20 @@ dnf repolist                            # BaseOS and AppStream
 ```
 
 ### 18. New logical volume
-If your disk is `/dev/sdb`, replace `vdb` with `sdb` in tasks 18 and 19.
+**Check your disk name first with `lsblk`.** The commands below use `/dev/sdb`. If your empty 2GB disk is `/dev/vdb` (virt-manager or UTM), change `sdb` to `vdb` before you paste.
 
 16MB x 40 = 640MB, so the LVM partition needs more than 640MB.
 > Not sure of the maths? Bash can do it: `echo $((16*40))` prints `640`.
 
 ```bash
-lsblk /dev/vdb
-parted /dev/vdb mklabel gpt
-parted /dev/vdb mkpart lvm 1MiB 801MiB
-parted /dev/vdb set 1 lvm on
+lsblk /dev/sdb
+parted /dev/sdb mklabel gpt
+parted /dev/sdb mkpart lvm 1MiB 801MiB
+parted /dev/sdb set 1 lvm on
 udevadm settle
 
-pvcreate /dev/vdb1
-vgcreate -s 16M finance /dev/vdb1
+pvcreate /dev/sdb1
+vgcreate -s 16M finance /dev/sdb1
 lvcreate -l 40 -n payroll finance
 mkfs.ext3 /dev/finance/payroll
 mkdir -p /mnt/payroll
@@ -368,10 +368,10 @@ df -hT /mnt/payroll                     # ext3
 
 ### 19. Swap
 ```bash
-parted /dev/vdb mkpart swap linux-swap 801MiB 1313MiB
+parted /dev/sdb mkpart swap linux-swap 801MiB 1313MiB
 udevadm settle
-mkswap /dev/vdb2
-blkid /dev/vdb2                         # copy the UUID
+mkswap /dev/sdb2
+blkid /dev/sdb2                         # copy the UUID
 vi /etc/fstab
 ```
 Add this line at the end, with your UUID, then save and quit:
@@ -383,7 +383,7 @@ systemctl daemon-reload
 swapon -a
 
 # Verify
-swapon --show                           # /dev/vdb2 512M plus the existing swap
+swapon --show                           # /dev/sdb2 512M plus the existing swap
 ```
 
 ### 20. Tuning profile

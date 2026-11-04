@@ -1,6 +1,6 @@
 #!/bin/bash
 # Mock exam: node2 prep. Run as root on node2 after setup-repo.sh.
-# WARNING: wipes the empty 1GB disk (/dev/vdc or /dev/sdc).
+# WARNING: wipes the empty 1GB disk (/dev/sdc or /dev/vdc).
 set -e
 
 # Find the empty 1GB disk, whatever the hypervisor calls it

@@ -106,7 +106,7 @@ Resize the logical volume `datalv` and its filesystem to 300MB. A size between 2
 Configure BaseOS and AppStream from the URLs above as the default repositories on node2.
 
 **18. New logical volume**
-Using the empty 2GB disk (`/dev/vdb`, or `/dev/sdb` on some systems. Check with `lsblk`):
+Using the empty 2GB disk (`/dev/sdb`, or `/dev/vdb` on some systems. Check with `lsblk`):
 - Create volume group `finance` with a physical extent size of 16MB
 - Create logical volume `payroll` with 40 extents
 - Format it as `ext3` and mount it persistently at `/mnt/payroll`

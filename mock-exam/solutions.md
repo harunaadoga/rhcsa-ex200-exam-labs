@@ -336,6 +336,8 @@ dnf repolist                            # BaseOS and AppStream
 If your disk is `/dev/sdb`, replace `vdb` with `sdb` in tasks 18 and 19.
 
 16MB x 40 = 640MB, so the LVM partition needs more than 640MB.
+> Not sure of the maths? Bash can do it: `echo $((16*40))` prints `640`.
+
 ```bash
 lsblk /dev/vdb
 parted /dev/vdb mklabel gpt

@@ -7,9 +7,13 @@
 ### 1.1 Cron job for hadoga
 ```bash
 crontab -e -u hadoga
+```
+Add this line, then save and quit:
+```
 */2 * * * * logger "RHCSA Playlist Now Available"
-
-# Verify
+```
+Verify:
+```bash
 crontab -l -u hadoga
 # wait 2 minutes, then:
 journalctl | grep "RHCSA Playlist"
@@ -60,13 +64,13 @@ dnf repolist                # BaseOS and AppStream listed
 
 ```bash
 dnf install -y chrony
-
 vi /etc/chrony.conf
-# comment out the existing pool line:
-#pool 2.rhel.pool.ntp.org iburst
-# add:
+```
+Put `#` in front of the `pool` line, add this line, then save and quit:
+```
 server server.rhel.com iburst
-
+```
+```bash
 systemctl enable chronyd
 systemctl restart chronyd
 
@@ -78,6 +82,9 @@ chronyc sources             # server.rhel.com is listed
 
 ```bash
 vi /etc/default/grub
+```
+Set these lines, then save and quit. Keep the existing options in `GRUB_CMDLINE_LINUX` and add `quiet` at the end:
+```
 GRUB_TIMEOUT=10
 GRUB_TIMEOUT_STYLE=hidden
 GRUB_CMDLINE_LINUX="<existing options> quiet"

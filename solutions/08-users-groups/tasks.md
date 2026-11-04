@@ -30,6 +30,9 @@ su - adoga                  # from a normal user, test password: perfect
 ### Minimum length 8
 ```bash
 vi /etc/security/pwquality.conf
+```
+Remove the `#` from the `minlen` line and set it to this, then save and quit:
+```
 minlen = 8
 ```
 
@@ -37,6 +40,9 @@ minlen = 8
 For new users:
 ```bash
 vi /etc/login.defs
+```
+Change the `PASS_MAX_DAYS` line to this, then save and quit:
+```
 PASS_MAX_DAYS   30
 ```
 

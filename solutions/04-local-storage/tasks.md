@@ -27,9 +27,11 @@ mkfs.ext4 /dev/devops_vg/devops_lv
 mkdir -p /mnt/devops_lv
 ```
 
-Add to /etc/fstab:
 ```bash
 vi /etc/fstab
+```
+Add this line at the end, then save and quit:
+```
 /dev/devops_vg/devops_lv  /mnt/devops_lv  ext4  defaults  0 0
 ```
 
@@ -51,9 +53,11 @@ mkswap /dev/vdb2
 blkid /dev/vdb2             # copy the UUID
 ```
 
-Add to /etc/fstab:
 ```bash
 vi /etc/fstab
+```
+Add this line at the end, with your UUID, then save and quit:
+```
 UUID=<uuid-from-blkid>  none  swap  defaults  0 0
 ```
 

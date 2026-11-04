@@ -95,6 +95,9 @@ id lucas
 For users created from now on:
 ```bash
 vi /etc/login.defs
+```
+Change the `PASS_MAX_DAYS` line to this, then save and quit:
+```
 PASS_MAX_DAYS   25
 ```
 Verify:
@@ -190,9 +193,13 @@ file /backup/doc_backup.tar.gz
 ### 12. Cron job
 ```bash
 crontab -e -u olivia
+```
+Add this line, then save and quit:
+```
 */4 * * * * logger "Mock exam in progress"
-
-# Verify
+```
+Verify:
+```bash
 crontab -l -u olivia
 # after 4 minutes:
 journalctl | grep "Mock exam in progress"
@@ -202,9 +209,12 @@ journalctl | grep "Mock exam in progress"
 ```bash
 dnf install -y chrony
 vi /etc/chrony.conf
-# comment out the existing pool line, then add:
+```
+Put `#` in front of the `pool` line, add this line, then save and quit:
+```
 server repo.rhcsa.home iburst
-
+```
+```bash
 systemctl enable chronyd
 systemctl restart chronyd
 
@@ -218,13 +228,20 @@ useradd -u 3001 -M -b /remotehome netuser1
 echo "netuser1:flamingo" | chpasswd
 
 dnf install -y autofs nfs-utils
-
 vi /etc/auto.master.d/remotehome.autofs
+```
+Add this line, then save and quit:
+```
 /remotehome  /etc/auto.remotehome
-
+```
+```bash
 vi /etc/auto.remotehome
+```
+Add this line, then save and quit:
+```
 netuser1  -rw,sync  repo.rhcsa.home:/home/netuser1
-
+```
+```bash
 systemctl enable --now autofs
 
 # Verify
@@ -284,10 +301,13 @@ vgcreate -s 16M finance /dev/vdb1
 lvcreate -l 40 -n payroll finance
 mkfs.ext3 /dev/finance/payroll
 mkdir -p /mnt/payroll
-
 vi /etc/fstab
+```
+Add this line at the end, then save and quit:
+```
 /dev/finance/payroll  /mnt/payroll  ext3  defaults  0 0
-
+```
+```bash
 systemctl daemon-reload
 mount -a
 
@@ -303,10 +323,13 @@ parted /dev/vdb mkpart swap linux-swap 801MiB 1313MiB
 udevadm settle
 mkswap /dev/vdb2
 blkid /dev/vdb2                         # copy the UUID
-
 vi /etc/fstab
+```
+Add this line at the end, with your UUID, then save and quit:
+```
 UUID=<uuid>  none  swap  defaults  0 0
-
+```
+```bash
 systemctl daemon-reload
 swapon -a
 

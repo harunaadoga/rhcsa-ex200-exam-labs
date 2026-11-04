@@ -11,7 +11,7 @@ Build the lab first: see [setup](./setup.md).
 - No internet, no notes. `man` pages and `/usr/share/doc` are allowed.
 - The real exam has no internet access. This lab uses it in one place only: Flathub in task 21b. In the real exam you use the repo URL the exam gives you. The commands are the same.
 - All changes must survive a reboot. Reboot both nodes at the end and check your work.
-- Use the VM console. SSH is optional unless a task asks for it.
+- Use the VM console. SSH is optional unless a task asks for it. Over SSH, log in as `hadoga` and run `su -` to become root.
 - If a task can't be done, move on and come back later.
 
 ## Environment

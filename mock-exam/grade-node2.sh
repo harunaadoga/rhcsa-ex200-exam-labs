@@ -62,8 +62,9 @@ if [ "$MAJOR" -ge 10 ]; then
 else
     echo "Task 21a: Rootless container (RHEL 9)"
     DEVOPS_UID=$(id -u devops)
+    # Run from / so podman doesn't fail on root's home directory
     podman_devops() {
-        runuser -u devops -- env XDG_RUNTIME_DIR=/run/user/$DEVOPS_UID podman "$@"
+        (cd / && runuser -u devops -- env XDG_RUNTIME_DIR=/run/user/$DEVOPS_UID podman "$@")
     }
     check "Linger enabled for devops" "loginctl show-user devops -p Linger | grep -q yes"
     check "Service file exists"       "[ -f /home/devops/.config/systemd/user/container-filebox.service ]"

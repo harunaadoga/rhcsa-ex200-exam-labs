@@ -17,6 +17,8 @@ echo "Using $DISK"
 
 # Hostnames
 hostnamectl set-hostname node2.rhcsa.home
+# Remove the lab lines added during setup, so they aren't listed twice
+sed -i '/rhcsa\.home/d' /etc/hosts
 cat >> /etc/hosts << 'HOSTS'
 192.168.70.5   repo.rhcsa.home repo
 192.168.70.10  node1.rhcsa.home node1 servera.rhcsa.home

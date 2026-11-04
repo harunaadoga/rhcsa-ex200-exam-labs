@@ -86,6 +86,8 @@ passwd hadoga
 
 If you already created `hadoga` during install, skip `useradd` and run `usermod -aG wheel hadoga` instead.
 
+Why `hadoga`? On RHEL 9 and 10, root can't log in over SSH with a password by default. Over SSH, log in as `hadoga`, then run `su -` with root's password, or `sudo -i` with hadoga's password. On the VM console, root can log in directly.
+
 ## 4. Set Up the Repo VM
 
 Needed for labs 05 and 10, and for the mock exam. Log in as root on the repo VM and run:
